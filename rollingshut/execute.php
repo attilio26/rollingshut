@@ -20,6 +20,15 @@ riferimenti:
 https://gist.github.com/salvatorecordiano/2fd5f4ece35e75ab29b49316e6b6a273
 https://www.salvatorecordiano.it/creare-un-bot-telegram-guida-passo-passo/
 */
+//------passaggio da getupdates a  WEBHOOK
+//da browser request ->   https://api.telegram.org/bot1011464393:AAER7EhOiy2ygCAFEdu5jzzk6WTSn7Thfes/setWebhook?url=https://rollingshut.herokuapp.com/execute.php
+//					 answer  <-   {"ok":true,"result":true,"description":"Webhook was set"}
+//          From now If the bot is using getUpdates, will return an object with the url field empty.
+//------passaggio da webhook a  GETUPDATES
+//da browser request ->   https://api.telegram.org/bot1011464393:AAER7EhOiy2ygCAFEdu5jzzk6WTSn7Thfes/setWebhook?url=
+//					 answer  <-   {"ok":true,"result":true,"description":"Webhook was deleted"}
+
+
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
