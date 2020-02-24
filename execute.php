@@ -79,7 +79,7 @@ elseif(strpos($text,"off_off")){
 }
 //<-- Lettura parametri slave4
 elseif(strpos($text,"serranda")){   
-	$response = file_get_contents("http://dario95.ddns.net:28083/mis");
+	$response = file_get_contents("http://dario95.ddns.net:28083");
 }
 
 //<-- Manda a video la risposta completa
