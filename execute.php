@@ -1,5 +1,5 @@
 <?php
-//24-02-2020
+//27-02-2020
 //started on 24-02-2020
 // La app di Heroku si puo richiamare da browser con
 //			https://rollingshut.herokuapp.com/
@@ -56,10 +56,13 @@ header("Content-Type: application/json");
 //ATTENZIONE!... Tutti i testi e i COMANDI contengono SOLO lettere minuscole
 $response = '';
 $helptext = "List of commands :
----CONVETTORI--- 
-/on_on    -> Lampade accese
-/ioff_eon -> Lampada esterna accesa 
-/off_off  -> Lampade spente
+---SERRANDA--- 
+/ext_on    -> Lampada esterna accesa
+/ext_off   -> Lampada esterna spenta 
+/int_on    -> Lampada interna accesa
+/int_off   -> Lampada interna spenta 
+/apri  		 -> Apre serranda
+/chiudi		 -> Chiude serranda
 /serranda  -> Lettura stato serranda
 ";
 
@@ -68,16 +71,28 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 }
 
 //<-- Comandi ai rele
-elseif(strpos($text,"on_on")){
-	$response = file_get_contents("http://dario95.ddns.net:28083/r3");
+//Lampada esterna
+elseif(strpos($text,"ext_on")){
+	$response = file_get_contents("http://dario95.ddns.net:28083/?a=0");
 }
-elseif($text=="/eon_ioff"){
-	$response = file_get_contents("http://dario95.ddns.net:28083/r2");
+elseif($text=="ext_off"){
+	$response = file_get_contents("http://dario95.ddns.net:28083/?a=1");
 }
-elseif(strpos($text,"off_off")){
-	$response = file_get_contents("http://dario95.ddns.net:28083/r0");
+//Lampada interna
+elseif(strpos($text,"int_on")){
+	$response = file_get_contents("http://dario95.ddns.net:28083/?a=2");
 }
-//<-- Lettura parametri slave4
+elseif($text=="int_off"){
+	$response = file_get_contents("http://dario95.ddns.net:28083/?a=3");
+}
+//serranda
+elseif(strpos($text,"apri")){
+	$response = file_get_contents("http://dario95.ddns.net:28083/?a=4");
+}
+elseif(strpos($text,"chiudi")){
+	$response = file_get_contents("http://dario95.ddns.net:28083/?a=5");
+}
+//<-- Lettura pagina web
 elseif(strpos($text,"serranda")){   
 	$response = file_get_contents("http://dario95.ddns.net:28083");
 }
@@ -100,7 +115,7 @@ else
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
-$parameters["reply_markup"] = '{ "keyboard": [["/on_on \ud83d\udd34", "/eon_ioff","/off_off \ud83d\udd35"],["/serranda \u2753"]], "one_time_keyboard": false, "resize_keyboard": true}';
+$parameters["reply_markup"] = '{ "keyboard": [["/ext_on", "/ext_off"],["/apri \ud83d\udd34", "/chiudi  \ud83d\udd35"],["/int_on", "/int_off"],["/serranda \u2753"]], "one_time_keyboard": false, "resize_keyboard": true}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
 ?>
