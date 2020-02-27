@@ -75,7 +75,7 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 elseif(strpos($text,"ext_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=0");
 }
-elseif(strpos($text,"ext_off"){
+elseif(strpos($text,"ext_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=1");
 }
 //Lampada interna
