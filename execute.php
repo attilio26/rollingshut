@@ -75,14 +75,14 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 elseif(strpos($text,"ext_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=0");
 }
-elseif($text=="ext_off"){
+elseif(strpos($text,"ext_off"){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=1");
 }
 //Lampada interna
 elseif(strpos($text,"int_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=2");
 }
-elseif($text=="int_off"){
+elseif(strpos($text,"int_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=3");
 }
 //serranda
