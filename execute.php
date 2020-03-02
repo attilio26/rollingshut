@@ -64,6 +64,8 @@ $helptext = "List of commands :
 /apri  		 -> Apre serranda
 /chiudi		 -> Chiude serranda
 /serranda  -> Lettura stato serranda
+/boil_on	 -> Caldaia Ferroli accendi
+/boil_off  -> Caldaia Ferroli spegni
 ";
 
 if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
@@ -71,31 +73,46 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 }
 
 //<-- Comandi ai rele
+//Comandi a Caldaia Ferroli
+elseif(strpos($text,"boil_on")){
+	$response = file_get_contents("http://dario95.ddns.net:28083/?a=6");
+	$response = substr($response, strpos($response, "r><h2>") + 1);
+}
+elseif(strpos($text,"boil_off")){
+	$response = file_get_contents("http://dario95.ddns.net:28083/?a=7");
+	$response = substr($response, strpos($response, "r><h2>") + 1);
+}
 //Lampada esterna
 elseif(strpos($text,"ext_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=0");
-	$response = substr($response, strpos($response, "Melucci _______") + 1);
+	$response = substr($response, strpos($response, "r><h2>") + 1);
 }
 elseif(strpos($text,"ext_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=1");
+	$response = substr($response, strpos($response, "r><h2>") + 1);
 }
 //Lampada interna
 elseif(strpos($text,"int_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=2");
+	$response = substr($response, strpos($response, "r><h2>") + 1);	
 }
 elseif(strpos($text,"int_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=3");
+	$response = substr($response, strpos($response, "r><h2>") + 1);	
 }
 //serranda
 elseif(strpos($text,"apri")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=4");
+	$response = substr($response, strpos($response, "r><h2>") + 1);
 }
 elseif(strpos($text,"chiudi")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=5");
+	$response = substr($response, strpos($response, "r><h2>") + 1);
 }
 //<-- Lettura pagina web
 elseif(strpos($text,"serranda")){   
 	$response = file_get_contents("http://dario95.ddns.net:28083");
+	$response = substr($response, strpos($response, "r><h2>") + 1);
 }
 
 //<-- Manda a video la risposta completa
@@ -116,7 +133,11 @@ else
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
-$parameters["reply_markup"] = '{ "keyboard": [["/ext_on", "/ext_off"],["/apri \ud83d\udd34", "/chiudi  \ud83d\udd35"],["/int_on", "/int_off"],["/serranda \u2753"]], "one_time_keyboard": false, "resize_keyboard": true}';
+$parameters["reply_markup"] = '{ "keyboard": [["/boil_on \ud83d\udd34", "/boil_off \ud83d\udd35"],
+["/ext_on", "/ext_off"],
+["/apri \ud83d\udd34", "/chiudi  \ud83d\udd35"],
+["/int_on", "/int_off"],
+["/serranda \u2753"]], "one_time_keyboard": false, "resize_keyboard": true}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
 ?>
