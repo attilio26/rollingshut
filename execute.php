@@ -1,5 +1,5 @@
 <?php
-//27-02-2020
+//03-02-2020
 //started on 24-02-2020
 // La app di Heroku si puo richiamare da browser con
 //			https://rollingshut.herokuapp.com/
@@ -74,6 +74,7 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 //Lampada esterna
 elseif(strpos($text,"ext_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=0");
+	$response = substr($response, strpos($response, "Melucci _______") + 1);
 }
 elseif(strpos($text,"ext_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=1");
