@@ -40,7 +40,7 @@ if(!$update)
 function clean_html_page($str_in){
 	$startch = strpos($str_in,"er><h2>") + 7 ;
 	$endch = $strpos($str_in," </a></h2><f");
-	$str_in = substr($str_in,$startch , 12);
+	$str_in = substr($str_in,$startch);
 	$str_in = str_replace("<a href='?a=","****",$str_in);
 	return $str_in;
 }
