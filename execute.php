@@ -38,10 +38,7 @@ if(!$update)
 }
 
 function clean_html_page($str_in){
-	$subtring_start = strpos($str_in, "r><h2>") + 6;
-	$size = strpos($str_in, "</a></h2><f", $subtring_start) - $subtring_start; 	
-	$str_in = substr($str_in, $subtring_start, $size);
-	$str_in = str_replace("<a href='?a=","   ",$str_in);
+	$str_in = str_replace("<a href='?a=","****",$str_in);
 	return $str_in;
 }
 
