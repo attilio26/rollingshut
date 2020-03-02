@@ -37,6 +37,14 @@ if(!$update)
   exit;
 }
 
+function clean_html_page(){
+	$subtring_start = strpos($response, "r><h2>") + 6;
+	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
+	$response = substr($response, $subtring_start, $size);
+	$response = str_replace("<a href='?a=","   ",$response);
+}
+
+
 $message = isset($update['message']) ? $update['message'] : "";
 $messageId = isset($message['message_id']) ? $message['message_id'] : "";
 $chatId = isset($message['chat']['id']) ? $message['chat']['id'] : "";
@@ -142,11 +150,6 @@ $parameters["reply_markup"] = '{ "keyboard": [["/boil_on \ud83d\udd34", "/boil_o
 echo json_encode($parameters);
 
 
-function clean_html_page(){
-	$subtring_start = strpos($response, "r><h2>") + 6;
-	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
-	$response = substr($response, $subtring_start, $size);
-	$response = str_replace("<a href='?a=","   ",$response);
-}
+
 
 ?>
