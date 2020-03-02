@@ -77,6 +77,7 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 elseif(strpos($text,"boil_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=6");
 	$response = substr($response, strpos($response, "r><h2>") + 1);
+	$response = substr($response,0,strpos($response,"<footer>";
 }
 elseif(strpos($text,"boil_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=7");
