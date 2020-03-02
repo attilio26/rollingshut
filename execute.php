@@ -37,11 +37,12 @@ if(!$update)
   exit;
 }
 
-function clean_html_page(){
-	$subtring_start = strpos($response, "r><h2>") + 6;
-	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
-	$response = substr($response, $subtring_start, $size);
-	$response = str_replace("<a href='?a=","   ",$response);
+function clean_html_page($str_in){
+	$subtring_start = strpos($str_in, "r><h2>") + 6;
+	$size = strpos($str_in, "</a></h2><f", $subtring_start) - $subtring_start; 	
+	$str_in = substr($str_in, $subtring_start, $size);
+	$str_in = str_replace("<a href='?a=","   ",$str_in);
+	return $str_in;
 }
 
 
@@ -83,44 +84,44 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 //<-- Comandi ai rele
 //Comandi a Caldaia Ferroli
 elseif(strpos($text,"boil_on")){
-	$response = file_get_contents("http://dario95.ddns.net:28083/?a=6");
-	clean_html_page();
+	$resp = file_get_contents("http://dario95.ddns.net:28083/?a=6");
+	$response = clean_html_page($resp);
 }
 elseif(strpos($text,"boil_off")){
-	$response = file_get_contents("http://dario95.ddns.net:28083/?a=7");
-	clean_html_page();	
+	$resp = file_get_contents("http://dario95.ddns.net:28083/?a=7");
+	$response = clean_html_page($resp);
 }
 //Lampada esterna
 elseif(strpos($text,"ext_on")){
-	$response = file_get_contents("http://dario95.ddns.net:28083/?a=0");
-	clean_html_page();		
+	$resp = file_get_contents("http://dario95.ddns.net:28083/?a=0");
+	$response = clean_html_page($resp);		
 }
 elseif(strpos($text,"ext_off")){
-	$response = file_get_contents("http://dario95.ddns.net:28083/?a=1");
-	clean_html_page();	
+	$resp = file_get_contents("http://dario95.ddns.net:28083/?a=1");
+	$response = clean_html_page($resp);
 }
 //Lampada interna
 elseif(strpos($text,"int_on")){
-	$response = file_get_contents("http://dario95.ddns.net:28083/?a=2");
-	clean_html_page();
+	$resp = file_get_contents("http://dario95.ddns.net:28083/?a=2");
+	$response = clean_html_page($resp);
 }
 elseif(strpos($text,"int_off")){
-	$response = file_get_contents("http://dario95.ddns.net:28083/?a=3");
-	clean_html_page();
+	$resp = file_get_contents("http://dario95.ddns.net:28083/?a=3");
+	$response = clean_html_page($resp);
 }
 //serranda
 elseif(strpos($text,"apri")){
-	$response = file_get_contents("http://dario95.ddns.net:28083/?a=4");
-	clean_html_page();
+	$resp = file_get_contents("http://dario95.ddns.net:28083/?a=4");
+	$response = clean_html_page($resp);
 }
 elseif(strpos($text,"chiudi")){
-	$response = file_get_contents("http://dario95.ddns.net:28083/?a=5");
-	clean_html_page();
+	$resp = file_get_contents("http://dario95.ddns.net:28083/?a=5");
+	$response = clean_html_page($resp);
 }
 //<-- Lettura pagina web
 elseif(strpos($text,"serranda")){   
-	$response = file_get_contents("http://dario95.ddns.net:28083");
-	clean_html_page();
+	$resp = file_get_contents("http://dario95.ddns.net:28083");
+	$response = clean_html_page($resp);
 }
 
 //<-- Manda a video la risposta completa
