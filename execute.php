@@ -79,12 +79,18 @@ elseif(strpos($text,"boil_on")){
 	$subtring_start = strpos($response, "r><h2>") + 6;
 	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
 	$response = substr($response, $subtring_start, $size);
+	$response = str_replace("<h2><a href='?a=","   ",$response);
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
 }
 elseif(strpos($text,"boil_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=7");
 	$subtring_start = strpos($response, "r><h2>") + 6;
 	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
 	$response = substr($response, $subtring_start, $size);
+	$response = str_replace("<h2><a href='?a=","   ",$response);
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
 }
 //Lampada esterna
 elseif(strpos($text,"ext_on")){
@@ -92,12 +98,18 @@ elseif(strpos($text,"ext_on")){
 	$subtring_start = strpos($response, "r><h2>") + 6;
 	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
 	$response = substr($response, $subtring_start, $size);
+	$response = str_replace("<h2><a href='?a=","   ",$response);
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	$response = str_replace("<h2><a href='?a=","   ",$response);		
 }
 elseif(strpos($text,"ext_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=1");
 	$subtring_start = strpos($response, "r><h2>") + 6;
 	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
 	$response = substr($response, $subtring_start, $size);
+	$response = str_replace("<h2><a href='?a=","   ",$response);
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	$response = str_replace("<h2><a href='?a=","   ",$response);		
 }
 //Lampada interna
 elseif(strpos($text,"int_on")){
@@ -106,12 +118,17 @@ elseif(strpos($text,"int_on")){
 	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
 	$response = substr($response, $subtring_start, $size);	
 	$response = str_replace("<h2><a href='?a=","   ",$response);
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
 }
 elseif(strpos($text,"int_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=3");
 	$subtring_start = strpos($response, "r><h2>") + 6;
 	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
 	$response = substr($response, $subtring_start, $size);	
+	$response = str_replace("<h2><a href='?a=","   ",$response);
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
 }
 //serranda
 elseif(strpos($text,"apri")){
@@ -119,12 +136,18 @@ elseif(strpos($text,"apri")){
 	$subtring_start = strpos($response, "r><h2>") + 6;
 	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
 	$response = substr($response, $subtring_start, $size);
+	$response = str_replace("<h2><a href='?a=","   ",$response);
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
 }
 elseif(strpos($text,"chiudi")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=5");
 	$subtring_start = strpos($response, "r><h2>") + 6;
 	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
 	$response = substr($response, $subtring_start, $size);
+	$response = str_replace("<h2><a href='?a=","   ",$response);
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
 }
 //<-- Lettura pagina web
 elseif(strpos($text,"serranda")){   
@@ -132,6 +155,9 @@ elseif(strpos($text,"serranda")){
 	$subtring_start = strpos($response, "r><h2>") + 6;
 	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
 	$response = substr($response, $subtring_start, $size);
+	$response = str_replace("<h2><a href='?a=","   ",$response);
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	$response = str_replace("<h2><a href='?a=","   ",$response);	
 }
 
 //<-- Manda a video la risposta completa
