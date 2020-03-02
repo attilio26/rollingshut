@@ -76,12 +76,7 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 //Comandi a Caldaia Ferroli
 elseif(strpos($text,"boil_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=6");
-	$subtring_start = strpos($response, "r><h2>") + 6;
-	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
-	$response = substr($response, $subtring_start, $size);
-	$response = str_replace("<h2><a href='?a=","   ",$response);
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	clean_html_page();
 }
 elseif(strpos($text,"boil_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=7");
@@ -185,4 +180,15 @@ $parameters["reply_markup"] = '{ "keyboard": [["/boil_on \ud83d\udd34", "/boil_o
 ["/serranda \u2753"]], "one_time_keyboard": false, "resize_keyboard": true}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
+
+
+function clean_html_page(){
+	$subtring_start = strpos($response, "r><h2>") + 6;
+	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
+	$response = substr($response, $subtring_start, $size);
+	$response = str_replace("<a href='?a=","   ",$response);
+	$response = str_replace("<a href='?a=","   ",$response);	
+	$response = str_replace("<a href='?a=","   ",$response);	
+}
+
 ?>
