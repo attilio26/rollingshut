@@ -80,79 +80,39 @@ elseif(strpos($text,"boil_on")){
 }
 elseif(strpos($text,"boil_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=7");
-	$subtring_start = strpos($response, "r><h2>") + 6;
-	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
-	$response = substr($response, $subtring_start, $size);
-	$response = str_replace("<h2><a href='?a=","   ",$response);
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	clean_html_page();	
 }
 //Lampada esterna
 elseif(strpos($text,"ext_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=0");
-	$subtring_start = strpos($response, "r><h2>") + 6;
-	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
-	$response = substr($response, $subtring_start, $size);
-	$response = str_replace("<h2><a href='?a=","   ",$response);
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
-	$response = str_replace("<h2><a href='?a=","   ",$response);		
+	clean_html_page();		
 }
 elseif(strpos($text,"ext_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=1");
-	$subtring_start = strpos($response, "r><h2>") + 6;
-	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
-	$response = substr($response, $subtring_start, $size);
-	$response = str_replace("<h2><a href='?a=","   ",$response);
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
-	$response = str_replace("<h2><a href='?a=","   ",$response);		
+	clean_html_page();	
 }
 //Lampada interna
 elseif(strpos($text,"int_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=2");
-	$subtring_start = strpos($response, "r><h2>") + 6;
-	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
-	$response = substr($response, $subtring_start, $size);	
-	$response = str_replace("<h2><a href='?a=","   ",$response);
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	clean_html_page();
 }
 elseif(strpos($text,"int_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=3");
-	$subtring_start = strpos($response, "r><h2>") + 6;
-	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
-	$response = substr($response, $subtring_start, $size);	
-	$response = str_replace("<h2><a href='?a=","   ",$response);
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	clean_html_page();
 }
 //serranda
 elseif(strpos($text,"apri")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=4");
-	$subtring_start = strpos($response, "r><h2>") + 6;
-	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
-	$response = substr($response, $subtring_start, $size);
-	$response = str_replace("<h2><a href='?a=","   ",$response);
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	clean_html_page();
 }
 elseif(strpos($text,"chiudi")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=5");
-	$subtring_start = strpos($response, "r><h2>") + 6;
-	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
-	$response = substr($response, $subtring_start, $size);
-	$response = str_replace("<h2><a href='?a=","   ",$response);
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	clean_html_page();
 }
 //<-- Lettura pagina web
 elseif(strpos($text,"serranda")){   
 	$response = file_get_contents("http://dario95.ddns.net:28083");
-	$subtring_start = strpos($response, "r><h2>") + 6;
-	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
-	$response = substr($response, $subtring_start, $size);
-	$response = str_replace("<h2><a href='?a=","   ",$response);
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
-	$response = str_replace("<h2><a href='?a=","   ",$response);	
+	clean_html_page();
 }
 
 //<-- Manda a video la risposta completa
@@ -187,8 +147,6 @@ function clean_html_page(){
 	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
 	$response = substr($response, $subtring_start, $size);
 	$response = str_replace("<a href='?a=","   ",$response);
-	$response = str_replace("<a href='?a=","   ",$response);	
-	$response = str_replace("<a href='?a=","   ",$response);	
 }
 
 ?>
