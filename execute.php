@@ -76,7 +76,9 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 //Comandi a Caldaia Ferroli
 elseif(strpos($text,"boil_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=6");
-	$response = substr($response, strpos($response, "r><h2>") + 1, strpos($response,"</a></h2><f");
+	$subtring_start = strpos($response, "r><h2>");
+	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
+	$response = substr($response, $subtring_start, $size);
 }
 elseif(strpos($text,"boil_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=7");
