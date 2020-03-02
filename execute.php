@@ -38,6 +38,8 @@ if(!$update)
 }
 
 function clean_html_page($str_in){
+	$startch = strpos($str_in,"er><h2>");
+	$str_in = substr($str_in,$startch + 6;
 	$str_in = str_replace("<a href='?a=","****",$str_in);
 	return $str_in;
 }
