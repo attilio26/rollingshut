@@ -105,6 +105,7 @@ elseif(strpos($text,"int_on")){
 	$subtring_start = strpos($response, "r><h2>") + 6;
 	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
 	$response = substr($response, $subtring_start, $size);	
+	$response = str_replace("<h2><a href='?a=","   ",$response);
 }
 elseif(strpos($text,"int_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=3");
