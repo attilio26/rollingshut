@@ -76,40 +76,42 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 //Comandi a Caldaia Ferroli
 elseif(strpos($text,"boil_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=6");
-	$subtring_start = strpos($response, "r><h2>");
+	$subtring_start = strpos($response, "r><h2>") + 6;
 	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
 	$response = substr($response, $subtring_start, $size);
 }
 elseif(strpos($text,"boil_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=7");
-	$response = substr($response, strpos($response, "r><h2>") + 1);
+	$subtring_start = strpos($response, "r><h2>") + 6;
+	$size = strpos($response, "</a></h2><f", $subtring_start) - $subtring_start; 	
+	$response = substr($response, $subtring_start, $size);
 }
 //Lampada esterna
 elseif(strpos($text,"ext_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=0");
-	$response = substr($response, strpos($response, "r><h2>") + 1);
+	$response = substr($response, strpos($response, "r><h2>") + 5);
 }
 elseif(strpos($text,"ext_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=1");
-	$response = substr($response, strpos($response, "r><h2>") + 1);
+	$response = substr($response, strpos($response, "r><h2>") + 5);
 }
 //Lampada interna
 elseif(strpos($text,"int_on")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=2");
-	$response = substr($response, strpos($response, "r><h2>") + 1);	
+	$response = substr($response, strpos($response, "r><h2>") + 5);	
 }
 elseif(strpos($text,"int_off")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=3");
-	$response = substr($response, strpos($response, "r><h2>") + 1);	
+	$response = substr($response, strpos($response, "r><h2>") + 5);	
 }
 //serranda
 elseif(strpos($text,"apri")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=4");
-	$response = substr($response, strpos($response, "r><h2>") + 1);
+	$response = substr($response, strpos($response, "r><h2>") + 5);
 }
 elseif(strpos($text,"chiudi")){
 	$response = file_get_contents("http://dario95.ddns.net:28083/?a=5");
-	$response = substr($response, strpos($response, "r><h2>") + 1);
+	$response = substr($response, strpos($response, "r><h2>") + 5);
 }
 //<-- Lettura pagina web
 elseif(strpos($text,"serranda")){   
