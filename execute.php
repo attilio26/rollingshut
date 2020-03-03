@@ -1,5 +1,5 @@
 <?php
-//03-02-2020
+//03-03-2020
 //started on 24-02-2020
 // La app di Heroku si puo richiamare da browser con
 //			https://rollingshut.herokuapp.com/
@@ -38,9 +38,9 @@ if(!$update)
 }
 
 function clean_html_page($str_in){
-	$startch = strpos($str_in,"er><h2>") + 7 ;
-	//$endch = strpos($str_in," </a></h2><f");
-	$str_in = substr($str_in,$startch);
+	$startch = strpos($str_in,"er><h2>") + 7 ;									//primo carattere utile da estrarre
+	$endch = strlen($str_in) - strpos($str_in," </a></h2><f");	//ultimo carattere utile da estrarre
+	$str_in = substr($str_in,$startch,$endch);
 	$str_in = str_replace("<a href='?a=","****",$str_in);
 	return $str_in;
 }
