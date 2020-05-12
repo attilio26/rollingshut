@@ -163,7 +163,7 @@ $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
 //---------emoticon:   https://apps.timwhitlock.info/emoji/tables/unicode  (prendere il codice Surrogates)
-$parameters["reply_markup"] = '{ "keyboard": [["/boil_on \ud83d\udd34", "/boil_off \ud83d\udd35"],
+$parameters["reply_markup"] = '{ "keyboard": [["/boil_on \ud83c\udf1e", "/boil_off \ud83c\udf00"],
 ["/tlc_on \ud83d\udd34", "/tlc_off \ud83d\udd35"],
 ["/ext_on", "/ext_off"],
 ["/apri \ud83d\udd3a", "/chiudi  \ud83d\udd3b"],
