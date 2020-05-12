@@ -1,5 +1,5 @@
 <?php
-//04-03-2020
+//12-05-2020
 //started on 24-02-2020
 // La app di Heroku si puo richiamare da browser con
 //			https://rollingshut.herokuapp.com/
@@ -51,6 +51,8 @@ function clean_html_page($str_in){
 	$str_in = str_replace("_  5'/>","_",$str_in);
 	$str_in = str_replace("_  6'/>","_",$str_in);
 	$str_in = str_replace("_  7'/>","_",$str_in);
+	$str_in = str_replace("_  8'/>","_",$str_in);
+	$str_in = str_replace("_  9'/>","_",$str_in);
 	return $str_in;
 }
 
@@ -84,6 +86,8 @@ $helptext = "List of commands :
 /serranda  -> Lettura stato serranda
 /boil_on	 -> Caldaia Ferroli accendi
 /boil_off  -> Caldaia Ferroli spegni
+/tlc_on	 	 -> telecamera garage accendi
+/tlc_off   -> telecamera garage spegni
 ";
 
 if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
@@ -91,6 +95,15 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 }
 
 //<-- Comandi ai rele
+//Telecamera garage
+elseif(strpos($text,"tlc_on")){
+	$resp = file_get_contents("http://dario95.ddns.net:28083/?a=8");
+	$response = clean_html_page($resp);
+}
+elseif(strpos($text,"tlc_off")){
+	$resp = file_get_contents("http://dario95.ddns.net:28083/?a=9");
+	$response = clean_html_page($resp);
+}
 //Comandi a Caldaia Ferroli
 elseif(strpos($text,"boil_on")){
 	$resp = file_get_contents("http://dario95.ddns.net:28083/?a=6");
@@ -138,8 +151,6 @@ elseif($text=="/verbose"){
 	$response = "chatId ".$chatId. "   messId ".$messageId. "  user ".$username. "   lastname ".$lastname. "   firstname ".$firstname . "\n". $helptext ;		
   $response = $response. "\n\n Heroku + dropbox libero.it";	
 }
-
-
 else
 {
 	$response = "Unknown command!";			//<---Capita quando i comandi contengono lettere maiuscole
@@ -151,7 +162,9 @@ else
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
+//---------emoticon:   https://apps.timwhitlock.info/emoji/tables/unicode
 $parameters["reply_markup"] = '{ "keyboard": [["/boil_on \ud83d\udd34", "/boil_off \ud83d\udd35"],
+["/tlc_on \ud83d\udd34", "/tlc_off \ud83d\udd35"],
 ["/ext_on", "/ext_off"],
 ["/apri \ud83d\udd34", "/chiudi  \ud83d\udd35"],
 ["/int_on", "/int_off"],
